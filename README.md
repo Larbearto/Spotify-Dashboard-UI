@@ -32,3 +32,25 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+async function refreshAccessToken(token) {
+try {
+spotifyApi.setAccessToken(token.accessToken)
+spotifyApi.setRefreshToken(token.refreshToken)
+
+    const { body: refreshedToken } = await spotifyApi.refreshAccessToken()
+    console.log('REFRESHED TOKEN IS', refreshedToken)
+
+    return {
+      ...token,
+      accessToken: refreshedToken.access_token,
+      accessTokenExpires: Date.now + refreshedToken.expires_in * 1000, // 1 hour in ms
+      refreshToken: refreshedToken.refresh_token ?? token.refreshToken // Replace if new one came back else fall back to old refresh token
+    }
+
+} catch (error) {
+return {
+...token,
+error: 'RefreshedAccessTokenError'
+}
+}
+}

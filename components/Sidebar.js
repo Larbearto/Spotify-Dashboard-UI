@@ -7,6 +7,7 @@ import {
 } from '@heroicons/react/solid'
 import { FaMicrophoneAlt } from 'react-icons/fa'
 import { RiCompassFill } from 'react-icons/ri'
+
 function Sidebar() {
   return (
     <section className='fixed top-0 z-40 flex flex-col p-4 items-center bg-black w-[90px] h-screen space-y-8'>

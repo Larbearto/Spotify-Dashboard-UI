@@ -1,4 +1,92 @@
-function Player() {
-	return <div>Player</div>
+import { useEffect } from 'react'
+import SpotifyPlayer from 'react-spotify-web-playback'
+import { useRecoilState } from 'recoil'
+import { playingTrackState, playState } from '../atoms/playerAtom'
+import {
+  BsFillPlayFill,
+  BsFillSkipEndFill,
+  BsFillSkipStartFill
+} from 'react-icons/bs'
+import {
+  FastForwardIcon,
+  PauseIcon,
+  PlayIcon,
+  ReplyIcon,
+  SwitchHorizontalIcon,
+  VolumeUpIcon as VolumeDownIcon
+} from '@heroicons/react/outline'
+import { FiVolume2 } from 'react-icons/fi'
+import { RiPlayList2Fill, RiComputerLine } from 'react-icons/ri'
+import { MdOutlineSpeaker } from 'react-icons/md'
+import { BiShuffle } from 'react-icons/bi'
+import { IoRepeatOutline } from 'react-icons/io5'
+import { CgArrowsExpandRight } from 'react-icons/cg'
+import Image from 'next/image'
+
+function Player({ accessToken, trackUri }) {
+  const [play, setPlay] = useRecoilState(playState)
+  const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState)
+
+  useEffect(() => {
+    if (trackUri) {
+      setPlay(true)
+    }
+  }, [trackUri])
+
+  if (!accessToken) return null
+
+  return (
+    <div className='bg-[#d5d5d5] flex items-center justify-between px-5 py-2.5 rounded-t-2xl relative space-x-20 md:space-x-0 overflow-x-scroll md:overflow-x-hidden scrollbar-hide border-4 border-[#1db954]'>
+      <div className='flex items-center'>
+        <Image
+          src={playingTrack.albumUrl}
+          alt=''
+          className='h-14 rounded-xl mr-3'
+          height={100}
+          width={100}
+        />
+        <div className='border-4 border-blue-500'>
+          <h4 className='text-white text-sm max-w-[150px] md:max-w-[250px] truncate'>
+            {playingTrack.title}
+          </h4>
+          <h5 className='text-xs text-[rgb(179,179,179)]'>
+            {playingTrack.artist}
+          </h5>
+        </div>
+
+        <div className='flex flex-col space-y-2 items-center md:absolute inset-x-auto w-full '>
+          <div className='flex items-center text-[#b3b3b3] text-xl space-x-4 border-3 border-sky-600'>
+            <BiShuffle className='text-lg playerIcon' />
+            <BsFillSkipStartFill className='playerIcon' />
+            <div className='bg-white text-black w-8 h-8 rounded-full flex items-center justify-center playerIcon hover:text-black'>
+              <PlayIcon className='w-20 h-20' />
+            </div>
+            <BsFillSkipEndFill className='playerIcon' />
+            <IoRepeatOutline className='playerIcon' />
+          </div>
+          <div className='flex items-center space-x-2.5 text-xs text-[#CECECE]'>
+            <h4 className='-mt-0.5'>0:00</h4>
+            <div className='bg-[#383838] w-72 lg:w-[450px] h-1 rounded-xl' />
+            <h4 className='-mt-0.5'>0:00</h4>
+          </div>
+        </div>
+        <div className='text-[#b3b3b3] flex items-center space-x-3'>
+          <RiPlayList2Fill className='playerIcon' />
+          <div className='flex items-center playerIcon'>
+            <RiComputerLine className='croppedIcon' />
+            <MdOutlineSpeaker className='-ml-2.5' />
+          </div>
+          <div className='flex items-center space-x-3'>
+            <FiVolume2 className='text-[#b3b3b3] text-xl playerIcon' />
+            <div className='bg-[#383838] w-[88px] h-1 rounded-xl'>
+              <div className='bg-[#b3b3b3] w-14 h-1 rounded-xl' />
+              <CgArrowsExpandRight className='playerIcon' />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
+
 export default Player

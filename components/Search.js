@@ -8,11 +8,11 @@ function Search({ search, setSearch }) {
         type='text'
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        placeholder='Search for artists, songs, or podcasts'
         className='bg-[#1a1a1a] text-white border-none lg:w-full focus:ring-0 outline-none placeholder-[#fafafa] text-xs'
+        placeholder='Search...'
       />
 
-      <div className='flex items-center divid-dotted divide-x-2 divide-[#333] ml-auto'>
+      <div className='flex items-center divide-dotted divide-x-2 divide-[#333] ml-auto'>
         <div className='flex space-x-2 pr-5'>
           <button className='tag'>Minimal</button>
           <button className='tag'>House</button>
@@ -27,4 +27,5 @@ function Search({ search, setSearch }) {
     </div>
   )
 }
+
 export default Search

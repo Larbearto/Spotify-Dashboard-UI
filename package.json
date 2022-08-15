@@ -1,24 +1,33 @@
 {
-  "name": "spotify-frankenstein",
+  "name": "spotify-dashboard",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^1.0.6",
     "@tailwindcss/forms": "^0.5.2",
     "next": "12.2.4",
+    "next-api-middleware": "^2.0.1",
     "next-auth": "^4.10.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
-    "tailwind-scrollbar-hide": "^1.1.7"
+    "react-loader-spinner": "^5.1.7-beta.1",
+    "react-spinners": "^0.13.4",
+    "react-spotify-web-playback": "^0.10.0",
+    "recoil": "^0.7.4",
+    "spotify-web-api-node": "^5.0.2",
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "typescript": "^4.7.4"
   },
   "devDependencies": {
+    "@types/node": "^18.7.4",
+    "@types/react": "^18.0.17",
     "autoprefixer": "^10.4.8",
     "eslint": "8.21.0",
     "eslint-config-next": "12.2.4",
